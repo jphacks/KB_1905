@@ -14,6 +14,8 @@
 		38CEC8A92358538F00E17F01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8A72358538F00E17F01 /* Main.storyboard */; };
 		38CEC8AB2358538F00E17F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8AA2358538F00E17F01 /* Assets.xcassets */; };
 		38CEC8AE2358538F00E17F01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8AC2358538F00E17F01 /* LaunchScreen.storyboard */; };
+		38CEC8B62358542400E17F01 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8B52358542400E17F01 /* SettingViewController.swift */; };
+		38CEC8B9235A459B00E17F01 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,10 @@
 		38CEC8A82358538F00E17F01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38CEC8AA2358538F00E17F01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38CEC8AD2358538F00E17F01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		38CEC8AF2358538F00E17F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38CEC8B52358542400E17F01 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		38CEC8B72359DACB00E17F01 /* JPHACKS_team5.5G.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JPHACKS_team5.5G.entitlements; sourceTree = "<group>"; };
+		38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		38CEC8BC235AA07E00E17F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/kandaakihiro/Documents/Swift/JPHACKS_team5.5G/JPHACKS_team5.5G/Info.plist; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +63,17 @@
 		38CEC89E2358538F00E17F01 /* JPHACKS_team5.5G */ = {
 			isa = PBXGroup;
 			children = (
+				38CEC8B72359DACB00E17F01 /* JPHACKS_team5.5G.entitlements */,
 				38CEC89F2358538F00E17F01 /* AppDelegate.swift */,
 				38CEC8A12358538F00E17F01 /* SceneDelegate.swift */,
+				38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */,
 				38CEC8A32358538F00E17F01 /* FirstViewController.swift */,
 				38CEC8A52358538F00E17F01 /* SecondViewController.swift */,
 				38CEC8A72358538F00E17F01 /* Main.storyboard */,
+				38CEC8BC235AA07E00E17F01 /* Info.plist */,
 				38CEC8AA2358538F00E17F01 /* Assets.xcassets */,
 				38CEC8AC2358538F00E17F01 /* LaunchScreen.storyboard */,
-				38CEC8AF2358538F00E17F01 /* Info.plist */,
+				38CEC8B52358542400E17F01 /* SettingViewController.swift */,
 			);
 			path = JPHACKS_team5.5G;
 			sourceTree = "<group>";
@@ -141,10 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38CEC8B62358542400E17F01 /* SettingViewController.swift in Sources */,
 				38CEC8A62358538F00E17F01 /* SecondViewController.swift in Sources */,
 				38CEC8A42358538F00E17F01 /* FirstViewController.swift in Sources */,
 				38CEC8A02358538F00E17F01 /* AppDelegate.swift in Sources */,
 				38CEC8A22358538F00E17F01 /* SceneDelegate.swift in Sources */,
+				38CEC8B9235A459B00E17F01 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,14 +298,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JPHACKS_team5.5G/JPHACKS_team5.5G.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V476MACKYD;
+				DEVELOPMENT_TEAM = AT8T3Z96ZW;
 				INFOPLIST_FILE = JPHACKS_team5.5G/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team5.5g.JPHACKS-team5-5G";
+				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team-5.5G.kobe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,14 +317,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JPHACKS_team5.5G/JPHACKS_team5.5G.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V476MACKYD;
+				DEVELOPMENT_TEAM = AT8T3Z96ZW;
 				INFOPLIST_FILE = JPHACKS_team5.5G/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team5.5g.JPHACKS-team5-5G";
+				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team-5.5G.kobe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
