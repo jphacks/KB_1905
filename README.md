@@ -3,7 +3,7 @@
 [![Product Name](image.png)](https://www.youtube.com/watch?v=G5rULR53uMk)
 
 ## 製品概要
-### X Tech（X → 今回皆さんが選定した好きな言葉に書き換えてください）
+### 荷物 × Tech
 
 ### 背景（製品開発のきっかけ、課題等）
 ここに
