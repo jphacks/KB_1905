@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <input type="button" onClick="sendMessage">
+  </body>
+  <script>
+    function sendMessage(){
+      var socketio = io();
+      socketio.emit('message', 'hello');
+    }
+    // $(function(){
+    //   $('#message_form').submit(function(){
+    //     socketio.emit('message', $('#input_msg').val());
+    //     $('#input_msg').val('');
+    //     return false;
+    //   });
+    // });
+  </script>
+</html>
