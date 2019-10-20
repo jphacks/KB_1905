@@ -40,6 +40,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         border.layer.borderColor = UIColor.black.cgColor
         //ボーダー色（白）
         border.layer.borderWidth = 2.0;
+        timestamp.layer.borderWidth = 2.0;
         border.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
 
 //        // 再生するイメージの配列を設定する
