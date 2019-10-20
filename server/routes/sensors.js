@@ -15,17 +15,51 @@ router.get('/', function(req, res, next) {
     // }
   };
 
+  // 加速度とRSSIを両方取得して返す
   docClient.scan(params, function(err, data) {
     if (err){
       console.log(err);
       res.send(err);
     } else {
-      console.log(data);
+      // console.log(data);
       let items = data.Items;
       items.sort(function(a,b){
         return b.timestamp-a.timestamp;
       });
-      res.send(items[0]);
+      // res.send(items[0]);
+      let move = items[0];
+
+      // rssiを取得
+      params = {
+        TableName : 'rssi',
+      };
+      docClient.scan(params, function(err, data) {
+        if (err){
+          console.log(err);
+          res.send(err);
+        } else {
+          // console.log(data);
+          let items = data.Items;
+          items.sort(function(a,b){
+            return b.timestamp-a.timestamp;
+          });
+          // res.send(items[0]);
+          let rssi = items[0]
+
+          // クライアントが希望する形に変更
+          let response_json = {}
+          response_json['rssi_timestamp'] = rssi.timestamp
+          response_json['dist'] = rssi.dist
+          response_json['move'] = move.move
+          response_json['move_timestamp'] = move.timestamp
+
+          // console.log(acc)
+          // console.log(rssi)
+          console.log(response_json)
+
+          res.send(response_json)
+        }
+      });
     }
   });
 });

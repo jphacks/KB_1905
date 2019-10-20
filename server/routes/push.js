@@ -45,6 +45,7 @@ router.post('/leave', function(req, res) {
       'name': 'akanda'
     }
   };
+
   docClient.get(params, function(err, data) {
     if (err){
       console.log(err);
@@ -63,6 +64,30 @@ router.post('/leave', function(req, res) {
   });
 });
 
+/* GET users listing. */
+router.get('/move', function(req, res, next) {
+
+  let params = {
+    TableName : 'move',
+    // Key: {
+    //   'name': 'Tomoki'
+    // }
+  };
+
+  docClient.scan(params, function(err, data) {
+    if (err){
+      console.log(err);
+      res.send(err);
+    } else {
+      console.log(data);
+      let items = data.Items;
+      items.sort(function(a,b){
+        return b.timestamp-a.timestamp;
+      });
+      res.send(items);
+    }
+  });
+});
 
 // 荷物が動いたときにpush通知
 router.post('/move', function(req, res) {
@@ -112,6 +137,19 @@ router.post('/move', function(req, res) {
         console.log(result);
       });
       res.send('ok');
+    }
+  });
+  // push通知送ったタイミングを保存
+  params = {
+    TableName: 'move',
+    Item://プライマリキーを必ず含める（ソートキーがある場合はソートキーも）
+      req.body
+  };
+  docClient.put(params, function(err,data){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(data);
     }
   });
 });
