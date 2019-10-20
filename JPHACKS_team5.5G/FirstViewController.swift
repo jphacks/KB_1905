@@ -13,7 +13,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var dangerTimes:[String] = []
       
     var sensorData: [String: Any]? = [:] //追加
-    
+    var dangerData: [[String: Any]] = [[:]] //追加
+
     @IBOutlet weak var timestamp: UITextField!
     
 //    @IBOutlet weak var tableBag: UIImageView!
@@ -23,7 +24,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var dangerLevel: UILabel!
     @IBOutlet weak var border: UILabel!
     
-  
+    @IBOutlet weak var sence: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -49,31 +51,79 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        //アニメーションスタート
 //        tableBag.startAnimating()
         let queue = OperationQueue()
-
+        var timestamp:Double = 0
+        var dangerFlag = 0
         queue.addOperation() {
             // do something in the background
             var count = 0
-            while(count < 10) {
+            while(count < 100) {
+                self.getDangerStatus()
                 self.getSensorStatus()
                 OperationQueue.main.addOperation() {
                     // when done, update your UI and/or model on the main queue
                     print(self.sensorData!)
-                    self.drawGraph(_height: count)
-                    //アニメーション
-                    if count == 6 {
-                        self.timer()
-                        let timestamp = (self.sensorData!["timestamp"] as! NSString).doubleValue
-                        self.timestamp.text = "危険な状態"
-                        self.timestamp.backgroundColor = UIColor.red
-                        self.timestamp.textColor = UIColor.black
-                        self.husinsha.image = UIImage(named: "husinsha")
-                        self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
-                        self.tableView.reloadData()
-                    }else if count > 6 {
-                        let timestamp = (self.sensorData!["timestamp"] as! NSString).doubleValue
-                        self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
-                        self.tableView.reloadData()
+                    let move = (self.sensorData!["move"] as! NSString).intValue
+
+                    self.drawGraph(_height: Int(move))
+                    
+//                    if move >= 50 && dangerFlag == 0{
+//                        //add
+//                        self.timer()
+//                        //timestamp = (self.sensorData!["move_timestamp"] as! NSString).doubleValue
+//                        self.timestamp.text = "危険な状態"
+//                        self.timestamp.backgroundColor = UIColor.red
+//                        self.timestamp.textColor = UIColor.black
+//                        self.husinsha.image = UIImage(named: "husinsha")
+//                        //self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
+//                        //self.tableView.reloadData()
+//                        dangerFlag = 1
+//                    }else if move > 50 && timestamp != (self.sensorData!["move_timestamp"] as! NSString).doubleValue{
+//                        timestamp = (self.sensorData!["move_timestamp"] as! NSString).doubleValue
+//                        //self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
+//                        //self.tableView.reloadData()
+//                    }
+                    
+                    //検知モード設定
+                    let dist:Int = Int((self.sensorData!["dist"] as! NSString).intValue)
+                    if dist <= -2{
+                        self.sence.text = "検知中・・・"
+                        self.sence.backgroundColor = UIColor.orange
+                        self.sence.textColor = UIColor.white
+                        
+                        //アニメーション
+                        if self.dangerTimes.count == 0{
+                            for danger in self.dangerData {
+                                timestamp = (danger["timestamp"] as! NSString).doubleValue
+                                self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
+                            }
+                            self.tableView.reloadData()
+                        }else if self.dangerData.count != self.dangerTimes.count{
+                            self.dangerTimes = []
+                            for danger in self.dangerData {
+                                 timestamp = (danger["timestamp"] as! NSString).doubleValue
+                                 self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
+                             }
+                             self.tableView.reloadData()
+                        }
+                        
+                        if move >= 50 && dangerFlag == 0{
+                            //add
+                            self.timer()
+                            //timestamp = (self.sensorData!["move_timestamp"] as! NSString).doubleValue
+                            self.timestamp.text = "危険です"
+                            self.timestamp.backgroundColor = UIColor.red
+                            self.timestamp.textColor = UIColor.black
+                            self.husinsha.image = UIImage(named: "husinsha")
+                            //self.dangerTimes.append(self.timeStampToDate(timestamp: timestamp))
+                            //self.tableView.reloadData()
+                            dangerFlag = 1
+                        }
+                    } else {
+                        self.sence.text = "検知モードオフ"
+                        self.sence.backgroundColor = UIColor.systemGroupedBackground
+                        self.sence.textColor = UIColor.darkGray
                     }
+                    
                 }
                 count += 1
             }
@@ -111,6 +161,28 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         sleep(2)
     }
     
+    //http get request
+    func getDangerStatus() {
+        let url: URL = URL(string: "https://www.55g-jphacks2019.tk/push/move")!
+        let task: URLSessionTask  = URLSession.shared.dataTask(with: url, completionHandler: {data, response, error in
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [Any]
+                let articles = json.map { (article) -> [String: Any] in
+                    return article as! [String: Any]
+                }
+                self.dangerData = articles
+                //print("timestamp: \(articles[0]["timestamp"])")
+                //print("move: \(articles[0]["move"])")
+                //print("count: \(self.sensorData!["gyro_X"]!)")
+            }
+            catch {
+                print(error)
+            }
+        })
+        task.resume()
+        //sleep(2)
+    }
+    
     //タイムスタンプを日時文字列に変換
     func timeStampToDate(timestamp: Double) -> String {
         // UNIX時間 "dateUnix" をNSDate型 "date" に変換
@@ -128,9 +200,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //危険度グラフ
     func drawGraph(_height: Int) {
-        dangerLevel.frame = CGRect(x: 70, y: 480 - _height * 40, width: 40, height: _height * 40)
+        dangerLevel.frame = CGRect(x: 70, y: 480 - _height * 4, width: 40, height: _height * 4)
         
-        let height = _height * 10
+        let height = _height
         switch height {
         case 0 ..< 25:
             dangerLevel.backgroundColor = UIColor.green
@@ -159,7 +231,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Tag番号 ２ で UILabel インスタンスの生成
          let label1 = cell.viewWithTag(2) as! UILabel
-         label1.text = dangerTimes[indexPath.row]
+        if dangerData.count > 0  {
+            label1.text = dangerTimes[indexPath.row]
+            //label1.text = (dangerData[]["timestamp"] as! String)
+
+        }
         
         // Tag番号 3 で UILabel インスタンスの生成
          let label2 = cell.viewWithTag(3) as! UILabel
