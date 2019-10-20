@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		38CEC89C2358538F00E17F01 /* JPHACKS_team5.5G.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPHACKS_team5.5G.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38CEC89C2358538F00E17F01 /* A-nimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "A-nimo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CEC89F2358538F00E17F01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38CEC8A12358538F00E17F01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		38CEC8A32358538F00E17F01 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		38CEC89D2358538F00E17F01 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38CEC89C2358538F00E17F01 /* JPHACKS_team5.5G.app */,
+				38CEC89C2358538F00E17F01 /* A-nimo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 			);
 			name = JPHACKS_team5.5G;
 			productName = JPHACKS_team5.5G;
-			productReference = 38CEC89C2358538F00E17F01 /* JPHACKS_team5.5G.app */;
+			productReference = 38CEC89C2358538F00E17F01 /* A-nimo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +113,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 38CEC8972358538F00E17F01 /* Build configuration list for PBXProject "JPHACKS_team5.5G" */;
+			buildConfigurationList = 38CEC8972358538F00E17F01 /* Build configuration list for PBXProject "A-nimo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -307,7 +307,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team-5.5G.kobe";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "A-nimo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -326,7 +326,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jphacks.team-5.5G.kobe";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "A-nimo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -335,7 +335,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38CEC8972358538F00E17F01 /* Build configuration list for PBXProject "JPHACKS_team5.5G" */ = {
+		38CEC8972358538F00E17F01 /* Build configuration list for PBXProject "A-nimo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38CEC8B02358538F00E17F01 /* Debug */,
