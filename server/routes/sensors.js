@@ -157,5 +157,23 @@ router.get('/moveHistory', function(req, res, next) {
     }
   });
 });
+// 履歴削除
+router.post('/move/delete', function(req, res, next) {
+  let delete_time = req.body.timestamp;
+
+  var params = {
+    TableName: 'move',
+    Key:{//削除したい項目をプライマリキー(及びソートキー)によって１つ指定
+         timestamp: delete_time
+    }
+  };
+  docClient.delete(params, function(err, data){
+    if(err){
+      res.send(err);
+    }else{
+      res.send(data);
+    }
+  });
+});
 
 module.exports = router;
