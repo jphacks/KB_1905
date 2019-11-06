@@ -130,4 +130,32 @@ router.post('/rssi', function(req, res) {
   res.send('ok');
 });
 
+// 履歴表示用
+router.get('/moveHistory', function(req, res, next) {
+  let start_time = Number(req.query.timestamp);
+
+  let params = {
+    TableName : 'sensors'
+  };
+
+  docClient.scan(params, function(err, data) {
+    if (err){
+      console.log(err);
+      res.send(err);
+    } else {
+      items = data.Items;
+      // 前後30秒を抽出
+      let filtered = items.filter(item => {
+        if(start_time - 30 < item.timestamp && item.timestamp < start_time + 30){
+          return item
+        }
+      });
+      filtered = filtered.sort(function(a,b){
+        return b.timestamp-a.timestamp;
+      });
+      res.send(filtered);
+    }
+  });
+});
+
 module.exports = router;
