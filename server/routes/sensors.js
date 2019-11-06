@@ -143,7 +143,7 @@ router.get('/moveHistory', function(req, res, next) {
       console.log(err);
       res.send(err);
     } else {
-      items = data.Items;
+      let items = data.Items;
       // 前後30秒を抽出
       let filtered = items.filter(item => {
         if(start_time - 30 < item.timestamp && item.timestamp < start_time + 30){
