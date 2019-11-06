@@ -93,7 +93,10 @@ def sensor():
             samp = {'move':str(move),'timestamp':str(dt)}
             headers = {'Content-Type':'application/json'}
             #センサ情報送信
-            response = requests.post('https://www.55g-jphacks2019.tk/sensors',data=json.dumps(samp),headers=headers,verify=False)
+            try:
+                response = requests.post('https://www.55g-jphacks2019.tk/sensors',data=json.dumps(samp),headers=headers,verify=False)
+            except:
+                print('error')
             print('--------move post--------')
             print(response)
             if dif > SCR_MOVE:
@@ -101,7 +104,10 @@ def sensor():
                 if int(dt) - before_dt > 30:
                 #動いたプッシュ通知
                     print('push')
-                    response = requests.post('https://www.55g-jphacks2019.tk/push/move',data=json.dumps(samp),headers=headers,verify=False)
+                    try:
+                        response = requests.post('https://www.55g-jphacks2019.tk/push/move',data=json.dumps(samp),headers=headers,verify=False)
+                    except:
+                        print('error')
                     print('*******move push*******')
                     print(response)
                     before_dt = int(dt)
@@ -138,7 +144,10 @@ def blue_tooth():
         dt = datetime.now().strftime('%s')
         samp = {'dist':str(rssi),'timestamp':str(dt)}
         headers = {'Content-Type':'application/json'}
-        response = requests.post('https://www.55g-jphacks2019.tk/sensors/rssi',data=json.dumps(samp),headers=headers,verify=False)
+        try:
+            response = requests.post('https://www.55g-jphacks2019.tk/sensors/rssi',data=json.dumps(samp),headers=headers,verify=False)
+        except:
+            print('error')
         print('--------rssi post--------')
         print(response)
         print(rssi)
@@ -147,7 +156,10 @@ def blue_tooth():
             FLG = 1
             dt = int(datetime.now().strftime('%s'))
             if dt - before_dt > 30:
-                response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(samp),headers=headers,verify=False)
+                try:
+                    response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(samp),headers=headers,verify=False)
+                except:
+                    print('error')
                 print('*******leave push*******')
                 print(response)
                 before_dt = dt
