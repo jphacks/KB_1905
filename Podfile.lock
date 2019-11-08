@@ -1,0 +1,22 @@
+PODS:
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
+  - LTMorphingLabel (0.7.0)
+
+DEPENDENCIES:
+  - Charts
+  - LTMorphingLabel
+
+SPEC REPOS:
+  trunk:
+    - Charts
+    - LTMorphingLabel
+
+SPEC CHECKSUMS:
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  LTMorphingLabel: 22147fb1ec2b0306537ccc348b36ea8617179b03
+
+PODFILE CHECKSUM: c0d9e27e2aaf05d64b2d53279dc63fabbc4b2995
+
+COCOAPODS: 1.8.4

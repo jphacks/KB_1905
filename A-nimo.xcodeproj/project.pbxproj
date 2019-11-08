@@ -3,26 +3,38 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		380819C0236E30FE002A7E27 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380819BF236E30FE002A7E27 /* MapKit.framework */; };
+		380819C2236E3116002A7E27 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380819C1236E3116002A7E27 /* CoreLocation.framework */; };
+		380819C4236E43DE002A7E27 /* LanchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380819C3236E43DE002A7E27 /* LanchScreenViewController.swift */; };
+		38967E852372843E00C2DBA9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38967E842372843E00C2DBA9 /* ChartView.swift */; };
+		38BB38D22360F4C800EBF25A /* SensorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BB38D12360F4C800EBF25A /* SensorDetailViewController.swift */; };
 		38CEC8A02358538F00E17F01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC89F2358538F00E17F01 /* AppDelegate.swift */; };
 		38CEC8A22358538F00E17F01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8A12358538F00E17F01 /* SceneDelegate.swift */; };
-		38CEC8A42358538F00E17F01 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8A32358538F00E17F01 /* FirstViewController.swift */; };
+		38CEC8A42358538F00E17F01 /* SensorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8A32358538F00E17F01 /* SensorViewController.swift */; };
 		38CEC8A62358538F00E17F01 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8A52358538F00E17F01 /* SecondViewController.swift */; };
 		38CEC8A92358538F00E17F01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8A72358538F00E17F01 /* Main.storyboard */; };
 		38CEC8AB2358538F00E17F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8AA2358538F00E17F01 /* Assets.xcassets */; };
 		38CEC8AE2358538F00E17F01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38CEC8AC2358538F00E17F01 /* LaunchScreen.storyboard */; };
 		38CEC8B62358542400E17F01 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8B52358542400E17F01 /* SettingViewController.swift */; };
 		38CEC8B9235A459B00E17F01 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */; };
+		89BB6DB3B8E3FA30D674C67A /* Pods_JPHACKS_team5_5G.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20E1A1B1F081963FE5A0DFE /* Pods_JPHACKS_team5_5G.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2803C53AA73E897C3E4A41D5 /* Pods-JPHACKS_team5.5G.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JPHACKS_team5.5G.debug.xcconfig"; path = "Target Support Files/Pods-JPHACKS_team5.5G/Pods-JPHACKS_team5.5G.debug.xcconfig"; sourceTree = "<group>"; };
+		380819BF236E30FE002A7E27 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		380819C1236E3116002A7E27 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		380819C3236E43DE002A7E27 /* LanchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanchScreenViewController.swift; sourceTree = "<group>"; };
+		38967E842372843E00C2DBA9 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		38BB38D12360F4C800EBF25A /* SensorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorDetailViewController.swift; sourceTree = "<group>"; };
 		38CEC89C2358538F00E17F01 /* A-nimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "A-nimo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CEC89F2358538F00E17F01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38CEC8A12358538F00E17F01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		38CEC8A32358538F00E17F01 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		38CEC8A32358538F00E17F01 /* SensorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorViewController.swift; sourceTree = "<group>"; };
 		38CEC8A52358538F00E17F01 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		38CEC8A82358538F00E17F01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38CEC8AA2358538F00E17F01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +43,8 @@
 		38CEC8B72359DACB00E17F01 /* JPHACKS_team5.5G.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JPHACKS_team5.5G.entitlements; sourceTree = "<group>"; };
 		38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		38CEC8BC235AA07E00E17F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/kandaakihiro/Documents/Swift/JPHACKS_team5.5G/JPHACKS_team5.5G/Info.plist; sourceTree = "<absolute>"; };
+		86F39FAB7B9237288C08DACE /* Pods-JPHACKS_team5.5G.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JPHACKS_team5.5G.release.xcconfig"; path = "Target Support Files/Pods-JPHACKS_team5.5G/Pods-JPHACKS_team5.5G.release.xcconfig"; sourceTree = "<group>"; };
+		A20E1A1B1F081963FE5A0DFE /* Pods_JPHACKS_team5_5G.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JPHACKS_team5_5G.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +52,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380819C2236E3116002A7E27 /* CoreLocation.framework in Frameworks */,
+				380819C0236E30FE002A7E27 /* MapKit.framework in Frameworks */,
+				89BB6DB3B8E3FA30D674C67A /* Pods_JPHACKS_team5_5G.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +66,8 @@
 			children = (
 				38CEC89E2358538F00E17F01 /* JPHACKS_team5.5G */,
 				38CEC89D2358538F00E17F01 /* Products */,
+				671BC2CF90468760906E8D6A /* Pods */,
+				3A20493B3CF2DF5B23D61646 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,17 +84,39 @@
 			children = (
 				38CEC8B72359DACB00E17F01 /* JPHACKS_team5.5G.entitlements */,
 				38CEC89F2358538F00E17F01 /* AppDelegate.swift */,
+				380819C3236E43DE002A7E27 /* LanchScreenViewController.swift */,
 				38CEC8A12358538F00E17F01 /* SceneDelegate.swift */,
 				38CEC8B8235A459B00E17F01 /* MyTabBarController.swift */,
-				38CEC8A32358538F00E17F01 /* FirstViewController.swift */,
+				38CEC8A32358538F00E17F01 /* SensorViewController.swift */,
 				38CEC8A52358538F00E17F01 /* SecondViewController.swift */,
 				38CEC8A72358538F00E17F01 /* Main.storyboard */,
+				38BB38D12360F4C800EBF25A /* SensorDetailViewController.swift */,
+				38967E842372843E00C2DBA9 /* ChartView.swift */,
 				38CEC8BC235AA07E00E17F01 /* Info.plist */,
 				38CEC8AA2358538F00E17F01 /* Assets.xcassets */,
 				38CEC8AC2358538F00E17F01 /* LaunchScreen.storyboard */,
 				38CEC8B52358542400E17F01 /* SettingViewController.swift */,
 			);
 			path = JPHACKS_team5.5G;
+			sourceTree = "<group>";
+		};
+		3A20493B3CF2DF5B23D61646 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				380819C1236E3116002A7E27 /* CoreLocation.framework */,
+				380819BF236E30FE002A7E27 /* MapKit.framework */,
+				A20E1A1B1F081963FE5A0DFE /* Pods_JPHACKS_team5_5G.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		671BC2CF90468760906E8D6A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2803C53AA73E897C3E4A41D5 /* Pods-JPHACKS_team5.5G.debug.xcconfig */,
+				86F39FAB7B9237288C08DACE /* Pods-JPHACKS_team5.5G.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,9 +126,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38CEC8B22358538F00E17F01 /* Build configuration list for PBXNativeTarget "JPHACKS_team5.5G" */;
 			buildPhases = (
+				B8FD48DF4E22065CAA4253CF /* [CP] Check Pods Manifest.lock */,
 				38CEC8982358538F00E17F01 /* Sources */,
 				38CEC8992358538F00E17F01 /* Frameworks */,
 				38CEC89A2358538F00E17F01 /* Resources */,
+				0D8E41900EA4596B55A7352F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,17 +187,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D8E41900EA4596B55A7352F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JPHACKS_team5.5G/Pods-JPHACKS_team5.5G-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JPHACKS_team5.5G/Pods-JPHACKS_team5.5G-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JPHACKS_team5.5G/Pods-JPHACKS_team5.5G-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8FD48DF4E22065CAA4253CF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JPHACKS_team5.5G-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		38CEC8982358538F00E17F01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				38CEC8B62358542400E17F01 /* SettingViewController.swift in Sources */,
+				38BB38D22360F4C800EBF25A /* SensorDetailViewController.swift in Sources */,
 				38CEC8A62358538F00E17F01 /* SecondViewController.swift in Sources */,
-				38CEC8A42358538F00E17F01 /* FirstViewController.swift in Sources */,
+				38CEC8A42358538F00E17F01 /* SensorViewController.swift in Sources */,
 				38CEC8A02358538F00E17F01 /* AppDelegate.swift in Sources */,
+				38967E852372843E00C2DBA9 /* ChartView.swift in Sources */,
 				38CEC8A22358538F00E17F01 /* SceneDelegate.swift in Sources */,
 				38CEC8B9235A459B00E17F01 /* MyTabBarController.swift in Sources */,
+				380819C4236E43DE002A7E27 /* LanchScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +384,7 @@
 		};
 		38CEC8B32358538F00E17F01 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2803C53AA73E897C3E4A41D5 /* Pods-JPHACKS_team5.5G.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JPHACKS_team5.5G/JPHACKS_team5.5G.entitlements;
@@ -315,6 +404,7 @@
 		};
 		38CEC8B42358538F00E17F01 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86F39FAB7B9237288C08DACE /* Pods-JPHACKS_team5.5G.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JPHACKS_team5.5G/JPHACKS_team5.5G.entitlements;

@@ -28,11 +28,11 @@ class ChartView:UIView {
      円グラフの軸となる円を表示
      */
     private func drawBaseChart(){
-        let shapeFrame = CGRect.init(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        let shapeFrame = CGRect.init(x: 45, y: 272, width: 100, height: 100)
         caShapeLayerForBase.frame = shapeFrame
         caShapeLayerForBase.strokeColor = UIColor(displayP3Red: 1, green: 0.8, blue: 0.4, alpha: 1.0).cgColor
         caShapeLayerForBase.fillColor = UIColor.clear.cgColor
-        caShapeLayerForBase.lineWidth = 50
+        caShapeLayerForBase.lineWidth = 15
         caShapeLayerForBase.lineCap = .round
 
         let startAngle:CGFloat = CGFloat(0.0)
@@ -48,13 +48,13 @@ class ChartView:UIView {
      */
     private func drawValueChart(rate:Double){
         //CAShareLayerを描く大きさを定義
-        let shapeFrame = CGRect.init(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        let shapeFrame = CGRect.init(x: 45, y: 272, width: 100, height: 100)
         caShapeLayerForValue.frame = shapeFrame
 
         //CAShareLayerのデザインを定義
         caShapeLayerForValue.strokeColor = UIColor(displayP3Red: 1, green: 0.4, blue: 0.4, alpha: 1).cgColor
         caShapeLayerForValue.fillColor = UIColor.clear.cgColor
-        caShapeLayerForValue.lineWidth = 50
+        caShapeLayerForValue.lineWidth = 15
         caShapeLayerForValue.lineCap = .round
 
         //開始位置を時計の0時の位置にする
