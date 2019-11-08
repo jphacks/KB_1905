@@ -179,6 +179,8 @@ def blue_tooth():
     FLG = 0
     # push間隔
     PUSH_INTERVAL_SEC = 10
+    # pushしたか
+    pushed = False
 
     # 最後にpush通知した時間
     pushed_dt = 0
@@ -204,17 +206,20 @@ def blue_tooth():
         if(rssi<-2):
             FLG = 1
             dt = int(datetime.now().strftime('%s'))
-            if dt - pushed_dt > PUSH_INTERVAL_SEC:
+            # if dt - pushed_dt > PUSH_INTERVAL_SEC:
+            if not pushed:
                 try:
                     response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(payload),headers=headers,verify=False)
                     print('*******leave push*******')
+                    pushed = True
                     # print(response)
-                    pushed_dt = dt
+                    # pushed_dt = dt
                 except:
                     print('error')
         else:
             print("-------------------")
             FLG = 0
+            pushed = False
 
 if __name__=='__main__':
     thread1 = threading.Thread(target=blue_tooth)
