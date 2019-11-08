@@ -11,6 +11,7 @@ import random
 import json
 import subprocess
 import re
+import pigpio
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -52,6 +53,38 @@ def sensor():
         y= read_word_sensor(ACCEL_YOUT)/ 16384.0
         z= read_word_sensor(ACCEL_ZOUT)/ 16384.0
         return [x, y, z]
+    class speaker(threading.Thread):
+        # 起動時か
+        init = False
+        def __init__(self, arg):
+            super().__init__()
+            self.init = arg
+        # Ture（起動時）は音を一回、検知時は音を10回
+        def run(self):
+            counter = 0
+            if self.init:
+                print("\n********\ninit\n********\n")
+                counter = 1
+            else:
+                print('\n\n********\nspeaker\n********\n\n')
+                counter = 10
+
+            gpio_pin0 = 18
+            gpio_pin1 = 19
+
+            pi = pigpio.pi()
+            pi.set_mode(gpio_pin0, pigpio.OUTPUT)
+
+            for i in range(counter):
+                pi.hardware_PWM(gpio_pin0,500,500000)
+                time.sleep(0.1)
+                pi.hardware_PWM(gpio_pin0, 1000, 100000)
+                time.sleep(0.2)
+
+            pi.set_mode(gpio_pin0, pigpio.INPUT)
+            pi.stop()
+            return
+
 
     # 動いたと判断する閾値
     SCR_MOVE = 0.2
@@ -60,10 +93,16 @@ def sensor():
 
     # 検知する時間感覚
     judge_time = 1
+    # push間隔
+    PUSH_INTERVAL_SEC = 10
 
     # judge_timeにavb_count回加速度を取得して平均
     avg_count = 5
     scr_l = [0] * avg_count
+
+    # 音再生用スレッド
+    thread = speaker(True)
+    thread.start()
 
     before_dt = 0
 
@@ -95,27 +134,29 @@ def sensor():
             #センサ情報送信
             try:
                 response = requests.post('https://www.55g-jphacks2019.tk/sensors',data=json.dumps(samp),headers=headers,verify=False)
+                print('--------move post--------')
+                print(response)
             except:
                 print('error')
-            print('--------move post--------')
-            print(response)
+
             if dif > SCR_MOVE:
+                if thread.is_alive():
+                    print('\n\n********\nalive\n********\n\n')
+                else:
+                    thread = speaker(False)
+                    thread.start()
                 # 30秒に1回
-                if int(dt) - before_dt > 30:
+                if int(dt) - before_dt > PUSH_INTERVAL_SEC:
                 #動いたプッシュ通知
                     print('push')
                     try:
                         response = requests.post('https://www.55g-jphacks2019.tk/push/move',data=json.dumps(samp),headers=headers,verify=False)
+                        print('*******move push*******')
+                        print(response)
+                        before_dt = int(dt)
                     except:
                         print('error')
-                    print('*******move push*******')
-                    print(response)
-                    before_dt = int(dt)
 
-            # print(count)
-            # if(count>99):
-            #     count = 0
-            # time.sleep(1)
 
 def blue_tooth():
     # shellのコマンドを使ってRSSI取得（ペアリング必要）
@@ -136,46 +177,52 @@ def blue_tooth():
     global FLG
     # 0:荷物に近い、1：荷物から遠い
     FLG = 0
+    # push間隔
+    PUSH_INTERVAL_SEC = 10
+    # pushしたか
+    pushed = False
 
-    before_dt = 0
+    # 最後にpush通知した時間
+    pushed_dt = 0
+
     while True:
+        # RSSIの取得と時間の取得
         rssi = readRSSI()
         time.sleep(1)
         dt = datetime.now().strftime('%s')
-        samp = {'dist':str(rssi),'timestamp':str(dt)}
+        payload = {'dist':str(rssi),'timestamp':str(dt)}
         headers = {'Content-Type':'application/json'}
+
+        # 距離は常にpost
         try:
-            response = requests.post('https://www.55g-jphacks2019.tk/sensors/rssi',data=json.dumps(samp),headers=headers,verify=False)
+            response = requests.post('https://www.55g-jphacks2019.tk/sensors/rssi',data=json.dumps(payload),headers=headers,verify=False)
+            print('--------rssi post--------')
+            # print(response)
+            print(rssi)
         except:
             print('error')
-        print('--------rssi post--------')
-        print(response)
-        print(rssi)
-        #離れたプッシュ通知
+
+        #離れたらpush通知
         if(rssi<-2):
             FLG = 1
             dt = int(datetime.now().strftime('%s'))
-            if dt - before_dt > 30:
+            # if dt - pushed_dt > PUSH_INTERVAL_SEC:
+            if not pushed:
                 try:
-                    response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(samp),headers=headers,verify=False)
+                    response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(payload),headers=headers,verify=False)
+                    print('*******leave push*******')
+                    pushed = True
+                    # print(response)
+                    # pushed_dt = dt
                 except:
                     print('error')
-                print('*******leave push*******')
-                print(response)
-                before_dt = dt
-
         else:
             print("-------------------")
             FLG = 0
-
-    
+            pushed = False
 
 if __name__=='__main__':
     thread1 = threading.Thread(target=blue_tooth)
     thread2 = threading.Thread(target=sensor)
     thread1.start()
     thread2.start()
-
-    # thread1.join()
-    # thread2.join()
-
