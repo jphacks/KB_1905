@@ -130,4 +130,50 @@ router.post('/rssi', function(req, res) {
   res.send('ok');
 });
 
+// 履歴表示用
+router.get('/moveHistory', function(req, res, next) {
+  let start_time = Number(req.query.timestamp);
+
+  let params = {
+    TableName : 'sensors'
+  };
+
+  docClient.scan(params, function(err, data) {
+    if (err){
+      console.log(err);
+      res.send(err);
+    } else {
+      let items = data.Items;
+      // 前後30秒を抽出
+      let filtered = items.filter(item => {
+        if(start_time - 30 < item.timestamp && item.timestamp < start_time + 30){
+          return item
+        }
+      });
+      filtered = filtered.sort(function(a,b){
+        return b.timestamp-a.timestamp;
+      });
+      res.send(filtered);
+    }
+  });
+});
+// 履歴削除
+router.post('/move/delete', function(req, res, next) {
+  let delete_time = req.body.timestamp;
+
+  var params = {
+    TableName: 'move',
+    Key:{//削除したい項目をプライマリキー(及びソートキー)によって１つ指定
+         timestamp: delete_time
+    }
+  };
+  docClient.delete(params, function(err, data){
+    if(err){
+      res.send(err);
+    }else{
+      res.send(data);
+    }
+  });
+});
+
 module.exports = router;
