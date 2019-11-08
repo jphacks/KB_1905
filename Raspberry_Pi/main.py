@@ -11,6 +11,7 @@ import random
 import json
 import subprocess
 import re
+import pigpio
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -52,6 +53,35 @@ def sensor():
         y= read_word_sensor(ACCEL_YOUT)/ 16384.0
         z= read_word_sensor(ACCEL_ZOUT)/ 16384.0
         return [x, y, z]
+    class speaker(threading.Thread):
+        init = False
+        def __init__(self, arg):
+            super().__init__()
+            self.init = arg
+
+        def run(self):
+            if self.init:
+                print("\n********\ninit\n********\n")
+                # self.init = False
+                return
+            print('\n\n********\nspeaker\n********\n\n')
+            sleep(10)
+            # gpio_pin0 = 18
+            # gpio_pin1 = 19
+
+            # pi = pigpio.pi()
+            # pi.set_mode(gpio_pin0, pigpio.OUTPUT)
+
+            # # for i in range(10):
+            # pi.hardware_PWM(gpio_pin0,500,500000)
+            # time.sleep(0.1)
+            # pi.hardware_PWM(gpio_pin0, 1000, 100000)
+            # time.sleep(0.2)
+
+            # pi.set_mode(gpio_pin0, pigpio.INPUT)
+            # pi.stop()
+            return
+
 
     # 動いたと判断する閾値
     SCR_MOVE = 0.2
@@ -64,6 +94,9 @@ def sensor():
     # judge_timeにavb_count回加速度を取得して平均
     avg_count = 5
     scr_l = [0] * avg_count
+
+    thread = speaker(True)
+    thread.start()
 
     before_dt = 0
 
@@ -95,27 +128,30 @@ def sensor():
             #センサ情報送信
             try:
                 response = requests.post('https://www.55g-jphacks2019.tk/sensors',data=json.dumps(samp),headers=headers,verify=False)
+                print('--------move post--------')
+                print(response)
             except:
                 print('error')
-            print('--------move post--------')
-            print(response)
+
             if dif > SCR_MOVE:
+                if thread.is_alive():
+                    print('\n\n********\nalive\n********\n\n')
+                else:
+                    thread = speaker(False)
+                    thread.start()
                 # 30秒に1回
                 if int(dt) - before_dt > 30:
                 #動いたプッシュ通知
                     print('push')
                     try:
                         response = requests.post('https://www.55g-jphacks2019.tk/push/move',data=json.dumps(samp),headers=headers,verify=False)
+                        print('*******move push*******')
+                        print(response)
+                        before_dt = int(dt)
                     except:
                         print('error')
-                    print('*******move push*******')
-                    print(response)
-                    before_dt = int(dt)
 
-            # print(count)
-            # if(count>99):
-            #     count = 0
-            # time.sleep(1)
+        time.sleep(1)
 
 def blue_tooth():
     # shellのコマンドを使ってRSSI取得（ペアリング必要）
@@ -146,11 +182,11 @@ def blue_tooth():
         headers = {'Content-Type':'application/json'}
         try:
             response = requests.post('https://www.55g-jphacks2019.tk/sensors/rssi',data=json.dumps(samp),headers=headers,verify=False)
+            print('--------rssi post--------')
+            print(response)
+            print(rssi)
         except:
             print('error')
-        print('--------rssi post--------')
-        print(response)
-        print(rssi)
         #離れたプッシュ通知
         if(rssi<-2):
             FLG = 1
@@ -158,17 +194,15 @@ def blue_tooth():
             if dt - before_dt > 30:
                 try:
                     response = requests.post('https://www.55g-jphacks2019.tk/push/leave',data=json.dumps(samp),headers=headers,verify=False)
+                    print('*******leave push*******')
+                    print(response)
+                    before_dt = dt
                 except:
                     print('error')
-                print('*******leave push*******')
-                print(response)
-                before_dt = dt
 
         else:
             print("-------------------")
             FLG = 0
-
-    
 
 if __name__=='__main__':
     thread1 = threading.Thread(target=blue_tooth)
@@ -178,4 +212,3 @@ if __name__=='__main__':
 
     # thread1.join()
     # thread2.join()
-
