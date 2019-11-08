@@ -19,10 +19,14 @@ class MyTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 3番目のタブにバッジ"New"を付ける
-        let tabBartItem = tabBar.items?[0]
-        tabBartItem?.badgeValue = "!"
     }
+    
+//    func setBadge() {
+//        let tabBartItem = tabBar.items?[0]
+//        // 1番目のタブにバッジ"New"を付ける
+//        tabBartItem?.badgeValue = "!"
+//
+//    }
 
     /*
     // MARK: - Navigation
