@@ -15,8 +15,8 @@ class SensorViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var sensorData: [String: Any]? = [:] //getしてきたセンサーデータ
     var dangerData: [[String: Any]] = [[:]] //危険を検知した時のセンサーデータ
     //var dangerData: [[String: Any]] = [["timestamp": "1571549693", "move": "70"]] //危険を検知した時のセンサーデータ
-    var move:Int = 90    //センサーの揺れ度
-    var dist:Double = -3.0   //Bluetoothの電波強度
+    var move:Int = 0    //センサーの揺れ度
+    var dist:Double = 0   //Bluetoothの電波強度
     var runAnimation: Timer?    //背景のアニメーションタイマー　泥棒が移動
     var selectedTime:String?    //詳細画面に送るデータを格納
     var selectedMove:Int?    //詳細画面に送るデータを格納
