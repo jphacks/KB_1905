@@ -28,7 +28,7 @@ class LanchScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         animoLogo.morphingEffect = .anvil
         animoLogo.text = "A-nimo"
-        
+        //animoLogo.textColor =
     }
     
     @objc func changeView() {

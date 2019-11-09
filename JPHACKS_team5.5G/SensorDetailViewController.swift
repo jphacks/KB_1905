@@ -22,9 +22,11 @@ class SensorDetailViewController: UIViewController {
     @IBOutlet weak var sensorLavelView: UILabel!
     @IBOutlet weak var sensorBackView: UIView!
     @IBOutlet weak var dangerSocondsView: UILabel!
+    @IBOutlet weak var dangerTextLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var moveLavel: UILabel!
+    @IBOutlet weak var yLavel: UILabel!
     
     //折れ線グラフ
     var chart: CombinedChartView!
@@ -39,12 +41,13 @@ class SensorDetailViewController: UIViewController {
     var dangerMove:Int = 0    //  追加
     var dangerData: [[String: Any]] = [[:]] //危険を検知した時のセンサーデータ
     var dangerSeconds: Int = 0 //揺れ検知時刻を格納
+    var maxDangerLevel: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let sensorData = SensorViewController()
         timeLabel.text = dangerTime
-        moveLavel.text = "\(dangerMove)%"
+
          print("###############sensordata:\(sensorData.dist)")
         // Do any additional setup after loading the view.
         //センサー履歴をget
@@ -56,12 +59,9 @@ class SensorDetailViewController: UIViewController {
         backgroundView(backView: sensorBackView, lavelView: sensorLavelView)
 
         //ここからグラフ描画
-        //円グラフ
-        self.view.addSubview(chartView)
-        let rate = Double(dangerMove)
-        chartView.drawChart(rate: rate)
         
         //折れ線グラフ
+        yLavel.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         //combinedDataを結合グラフに設定する
         
         let combinedData = CombinedChartData()
@@ -70,7 +70,7 @@ class SensorDetailViewController: UIViewController {
         combinedData.lineData = generateLineData()
 
         //グラフのサイズ設定、座標設定
-        chart = CombinedChartView(frame: CGRect(x: 20, y: self.view.frame.height - 380, width: self.view.frame.width - 50 , height: 250))
+        chart = CombinedChartView(frame: CGRect(x: 30, y: self.view.frame.height - 380, width: self.view.frame.width - 50 , height: 250))
 
         //chartのデータにcombinedDataを挿入する
         chart.data = combinedData
@@ -105,7 +105,7 @@ class SensorDetailViewController: UIViewController {
         //ｘ軸
         let xAxis = chart.xAxis
         xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size:18)!
-        xAxis.setLabelCount(4, force: true)
+        xAxis.setLabelCount(3, force: true)
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 11)
         xAxis.labelTextColor = .black
@@ -143,6 +143,7 @@ class SensorDetailViewController: UIViewController {
             if moveHistry >= 20 {
                 dangerSeconds += 1
             }
+            maxDangerLevel = max(maxDangerLevel, Int(moveHistry))
             //ｘ軸のセット
             let time = SensorViewController()
             let timeStamp = (dangerData["timestamp"] as! NSString).doubleValue
@@ -182,6 +183,18 @@ class SensorDetailViewController: UIViewController {
         lineDataSet.fillColor = UIColor(red: 244/255, green: 177/255, blue: 177/255, alpha: 0.5)
         //上で作ったデータをリストにappendで入れる
         linedata.append(lineDataSet)
+
+        moveLavel.text = "\(maxDangerLevel)%"
+        if maxDangerLevel >= 80 {
+            dangerTextLabel.text = "非常に危険です"
+        } else if maxDangerLevel >= 40 {
+            dangerTextLabel.text = "危険です"
+        }
+        
+        //円グラフ
+        self.view.addSubview(chartView)
+        let rate = Double(maxDangerLevel)
+        chartView.drawChart(rate: rate)
 
         //データを返す。
         return LineChartData(dataSets: linedata)
