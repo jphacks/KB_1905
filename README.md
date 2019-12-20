@@ -1,6 +1,8 @@
 # A-nimo　ー安心・安全な荷物デバイスー
 [![Product Name](image.png)](https://www.youtube.com/watch?v=WaeQqMHJidM)
-
+## チーム名：5.5G
+### チームメンバ
+神田章博、平井友樹、坂東航、村野翔太
 ## 製品概要
 ### 荷物 × Tech
 
